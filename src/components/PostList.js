@@ -26,6 +26,7 @@ class PostList extends React.Component {
   handleVoteUpClick(index) {
     let newPostList = this.state.masterPostList.slice();
     newPostList[index].votes++;
+    this.sortPostList(newPostList);
     this.setState({
       masterPostList: newPostList
     })
@@ -34,8 +35,15 @@ class PostList extends React.Component {
   handleVoteDownClick(index) {
     let newPostList = this.state.masterPostList.slice();
     newPostList[index].votes--;
+    this.sortPostList(newPostList);
     this.setState({
       masterPostList: newPostList
+    })
+  }
+
+  sortPostList(postList) {
+    postList.sort((a, b) => {
+      return b.votes - a.votes;
     })
   }
 

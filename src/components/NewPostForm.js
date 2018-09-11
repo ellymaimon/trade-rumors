@@ -22,10 +22,10 @@ const NewPostForm = (props) => {
   return (
     <Form onSubmit={handleSubmit}>
       <Form.Group widths='equal'>
-        <Form.Input label='Name' name='name' placeholder='Your Name' value="Elly M."/>
-        <Form.Input label='Post Title' name='title' placeholder='Post Title' value="Kevin Durant"/>
+        <Form.Input label='Name' name='name' placeholder='Your Name' />
+        <Form.Input label='Post Title' name='title' placeholder='Post Title' />
       </Form.Group>
-      <Form.TextArea label='Post Description' name='description' placeholder='Trade Rumor...' value="Kevin Durant is going to the Lakers wtf bro!!"/>
+      <Form.TextArea label='Post Description' name='description' placeholder='Trade Rumor...' />
       <Form.Button color='blue'>Submit Rumor</Form.Button>
     </Form>
   )
