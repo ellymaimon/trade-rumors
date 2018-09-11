@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Feed from './Feed';
-import NewPostForm from './NewPostForm';
 
 class App extends Component {
   render() {

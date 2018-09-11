@@ -12,7 +12,6 @@ class Post extends React.Component {
     this.handleUpVote = this.handleUpVote.bind(this);
     this.handleDownVote = this.handleDownVote.bind(this);
     this.handleToggleComments = this.handleToggleComments.bind(this);
-    this.handleAddingNewComment = this.handleAddingNewComment.bind(this);
   }
 
   handleUpVote() {
@@ -29,22 +28,14 @@ class Post extends React.Component {
     })
   }
 
-  handleAddingNewComment(newComment) {
-    let newCommentList = this.state.masterCommentList.slice();
-    newComment.push(newComment);
-    this.setState({
-      masterCommentList: newCommentList
-    })
-  }
-
   render () {
-    const {name, title, description, time, votes, id, index, comments} = this.props;
+    const {name, title, description, time, votes, index, comments} = this.props;
     let currentView = null;
 
     if (this.state.commentsVisible) {
       currentView = <div>
                       <Button size="mini" onClick={this.handleToggleComments}>Hide Comments</Button>
-                      <CommentList onNewCommentCreation={this.handleAddingNewComment} comments={comments}/>
+                      <CommentList onNewCommentCreation={this.props.onNewCommentCreation} comments={comments} index={index}/>
                     </div>
     } else {
       currentView = <Button size="mini" onClick={this.handleToggleComments}>Show Comments</Button>
@@ -73,7 +64,8 @@ Post.propTypes = {
   votes: PropTypes.number.isRequired,
   index: PropTypes.number.isRequired,
   onVoteUpClick: PropTypes.func.isRequired,
-  onVoteDownClick: PropTypes.func.isRequired
+  onVoteDownClick: PropTypes.func.isRequired,
+  onNewCommentCreation: PropTypes.func.isRequired
 }
 
 export default Post;

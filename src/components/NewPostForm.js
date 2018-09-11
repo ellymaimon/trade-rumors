@@ -11,6 +11,7 @@ const NewPostForm = (props) => {
       description : e.target.description.value,
       time : new Date().toLocaleString(),
       votes: 0,
+      comments: [],
       id: v4()
     }
     props.onNewPostCreation(newPost);
