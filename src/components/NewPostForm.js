@@ -3,11 +3,16 @@ import PropTypes from 'prop-types'
 import { Form } from 'semantic-ui-react'
 
 const NewPostForm = (props) => {
-  // let _name = null;
-
   const handleSubmit = (e) => {
-    console.log(e.target.name.value, e.target.title.value, e.target.description.value);
+    let newPost = {
+      name : e.target.name.value,
+      title : e.target.title.value,
+      description : e.target.description.value,
+      time : new Date().toLocaleString()
+    }
+    props.onNewPostCreation(newPost);
     props.onNewPostSubmit();
+
   }
 
   return (

@@ -14,7 +14,9 @@ class PostList extends React.Component {
   }
 
   handleAddingNewPost(newPost) {
+    console.log(newPost)
     let newMasterPostList = this.state.masterPostList.slice();
+    // newPost.time = new Date().toLocaleString();
     newMasterPostList.push(newPost);
     this.setState({
       masterPostList: newMasterPostList

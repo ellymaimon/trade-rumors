@@ -25,7 +25,7 @@ class Post extends React.Component {
   }
 
   render() {
-    const {title, name, post, time} = this.props;
+    const {title, name, description, time} = this.props;
     return (
       <div>
         <h3>{title}</h3>
@@ -33,7 +33,7 @@ class Post extends React.Component {
         <p>{this.state.votes}</p>
         <Icon size='large' name='hand point down outline' onClick={this.handleVoteDownClick}/>
         <p><em>By {name} at {time}</em></p>
-        <p>{post}</p>
+        <p>{description}</p>
         <br/>
       </div>
     )
@@ -43,7 +43,7 @@ class Post extends React.Component {
 Post.propTypes = {
   title: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  post: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
   time: PropTypes.string.isRequired
 }
 
