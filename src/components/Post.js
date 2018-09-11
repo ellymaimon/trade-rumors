@@ -33,22 +33,25 @@ class Post extends React.Component {
     let currentView = null;
 
     if (this.state.commentsVisible) {
-      currentView = <div>
+      currentView = <span>
                       <Button size="mini" onClick={this.handleToggleComments}>Hide Comments</Button>
                       <CommentList onNewCommentCreation={this.props.onNewCommentCreation} comments={comments} index={index}/>
-                    </div>
+                    </span>
     } else {
-      currentView = <Button size="mini" onClick={this.handleToggleComments}>Show Comments</Button>
+      currentView = <Button size="mini" onClick={this.handleToggleComments} animated='fade'>
+                      <Button.Content visible>Show Comments</Button.Content>
+                      <Button.Content hidden>Or add a reply</Button.Content>
+                    </Button>
     }
 
     return (
       <div>
         <h3>{title}</h3>
-        <Icon size='large' name='hand point up outline' onClick={this.handleUpVote} style={{display:'inline-block'}}/>
-        <p  style={{display:'inline-block'}}>{votes}</p>
-        <Icon size='large' name='hand point down outline' onClick={this.handleDownVote} style={{display:'inline-block'}}/>
         <p><em>By {name} at {time}</em></p>
         <p>{description}</p>
+        <Icon size='big' name='hand point up outline' onClick={this.handleUpVote} style={{display:'inline-block'}}/>
+        <p  style={{display:'inline-block', fontSize:'1.2em', marginRight:'2px', fontWeight:'bold'}}>{votes}</p>
+        <Icon size='big' name='hand point down outline' onClick={this.handleDownVote} style={{display:'inline-block'}}/>
         {currentView}
         <hr/>
       </div>

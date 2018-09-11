@@ -17,16 +17,25 @@ class PostListHeader extends React.Component {
   }
 
   render () {
+    const headerTitle = {
+      display: "inline-block",
+      fontSize: "52px"
+    }
+    const headerButton = {
+      position: "fixed",
+      right: '50px'
+    }
+
     let currentView = null;
 
     if(this.state.formVisibleOnPage) {
       currentView = <NewPostForm onNewPostCreation={this.props.onNewPostCreation} onNewPostSubmit={this.handleNewPostToggle}/>;
     } else {
-      currentView = <Button onClick={ this.handleNewPostToggle }>New Post</Button>;
+      currentView = <Button style={headerButton} color='teal' onClick={ this.handleNewPostToggle }>New Post</Button>;
     }
     return(
       <div>
-        <h1>Trade Rumors</h1>
+        <h1 style={headerTitle}>Trade Rumors</h1>
         { currentView }
       </div>
     )
