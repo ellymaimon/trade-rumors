@@ -11,15 +11,31 @@ class PostList extends React.Component {
       masterPostList: []
     }
     this.handleAddingNewPost = this.handleAddingNewPost.bind(this);
+    this.handleVoteUpClick = this.handleVoteUpClick.bind(this);
+    this.handleVoteDownClick = this.handleVoteDownClick.bind(this);
   }
 
   handleAddingNewPost(newPost) {
-    console.log(newPost)
     let newMasterPostList = this.state.masterPostList.slice();
-    // newPost.time = new Date().toLocaleString();
     newMasterPostList.push(newPost);
     this.setState({
       masterPostList: newMasterPostList
+    })
+  }
+
+  handleVoteUpClick(index) {
+    let newPostList = this.state.masterPostList.slice();
+    newPostList[index].votes++;
+    this.setState({
+      masterPostList: newPostList
+    })
+  }
+
+  handleVoteDownClick(index) {
+    let newPostList = this.state.masterPostList.slice();
+    newPostList[index].votes--;
+    this.setState({
+      masterPostList: newPostList
     })
   }
 
@@ -28,7 +44,7 @@ class PostList extends React.Component {
       <div>
         <PostListHeader onNewPostCreation={this.handleAddingNewPost} />
         {this.state.masterPostList.map((post, index) =>
-          <Post {...post} key={index} />
+          <Post {...post} key={post.id} index={index} onVoteUpClick={this.handleVoteUpClick} onVoteDownClick={this.handleVoteDownClick}/>
         )}
       </div>
     )
