@@ -9,20 +9,20 @@ class PostListHeader extends React.Component {
     this.state = {
       formVisibleOnPage: false
     }
-    this.handleNewPostClick = this.handleNewPostClick.bind(this);
+    this.handleNewPostToggle = this.handleNewPostToggle.bind(this);
   }
 
-  handleNewPostClick() {
-    this.setState({ formVisibleOnPage: true })
+  handleNewPostToggle() {
+    this.setState({ formVisibleOnPage: !this.state.formVisibleOnPage })
   }
 
   render () {
     let currentView = null;
 
     if(this.state.formVisibleOnPage) {
-      currentView = <NewPostForm onNewPostCreation={this.props.onNewPostCreation}/>;
+      currentView = <NewPostForm onNewPostCreation={this.props.onNewPostCreation} onNewPostSubmit={this.handleNewPostToggle}/>;
     } else {
-      currentView = <Button onClick={ this.handleNewPostClick }>New Post</Button>;
+      currentView = <Button onClick={ this.handleNewPostToggle }>New Post</Button>;
     }
     return(
       <div>
