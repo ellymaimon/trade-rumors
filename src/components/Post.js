@@ -1,30 +1,60 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Icon } from 'semantic-ui-react'
+import { Icon, Button } from 'semantic-ui-react'
+import CommentList from './CommentList'
 
-const Post = (props) => {
-
-  const handleUpVote = () => {
-    props.onVoteUpClick(props.index);
+class Post extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      commentsVisible: false,
+      masterCommentList: []
+    }
+    this.handleUpVote = this.handleUpVote.bind(this);
+    this.handleDownVote = this.handleDownVote.bind(this);
+    this.handleToggleComments = this.handleToggleComments.bind(this);
   }
 
-  const handleDownVote = () => {
-    props.onVoteDownClick(props.index);
+  handleUpVote() {
+    this.props.onVoteUpClick(this.props.index);
   }
 
-  const {name, title, description, time, votes, id, index} = props;
+  handleDownVote() {
+    this.props.onVoteDownClick(this.props.index);
+  }
 
-  return (
-    <div>
-      <h3>{title}</h3>
-      <Icon size='large' name='hand point up outline' onClick={handleUpVote} style={{display:'inline-block'}}/>
-      <p  style={{display:'inline-block'}}>{votes}</p>
-      <Icon size='large' name='hand point down outline' onClick={handleDownVote} style={{display:'inline-block'}}/>
-      <p><em>By {name} at {time}</em></p>
-      <p>{description}</p>
-      <hr/>
-    </div>
-  )
+  handleToggleComments() {
+    this.setState({
+      commentsVisible: !this.state.commentsVisible
+    })
+  }
+
+  render () {
+    const {name, title, description, time, votes, id, index} = this.props;
+    let currentView = null;
+
+    if (this.state.commentsVisible) {
+      currentView = <div>
+                      <Button size="mini" onClick={this.handleToggleComments}>Hide Comments</Button>
+                      <CommentList />
+                    </div>
+    } else {
+      currentView = <Button size="mini" onClick={this.handleToggleComments}>Show Comments</Button>
+    }
+
+    return (
+      <div>
+        <h3>{title}</h3>
+        <Icon size='large' name='hand point up outline' onClick={this.handleUpVote} style={{display:'inline-block'}}/>
+        <p  style={{display:'inline-block'}}>{votes}</p>
+        <Icon size='large' name='hand point down outline' onClick={this.handleDownVote} style={{display:'inline-block'}}/>
+        <p><em>By {name} at {time}</em></p>
+        <p>{description}</p>
+        {currentView}
+        <hr/>
+      </div>
+    )
+  }
 }
 
 Post.propTypes = {
