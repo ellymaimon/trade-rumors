@@ -20,7 +20,7 @@ class PostListHeader extends React.Component {
     let currentView = null;
 
     if(this.state.formVisibleOnPage) {
-      currentView = <NewPostForm />;
+      currentView = <NewPostForm onNewPostCreation={this.props.onNewPostCreation}/>;
     } else {
       currentView = <Button onClick={ this.handleNewPostClick }>New Post</Button>;
     }
@@ -31,6 +31,10 @@ class PostListHeader extends React.Component {
       </div>
     )
   }
+}
+
+PostListHeader.propTypes = {
+  onNewPostCreation: PropTypes.func.isRequired
 }
 
 export default PostListHeader;
