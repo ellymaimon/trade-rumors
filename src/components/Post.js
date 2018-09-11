@@ -8,11 +8,11 @@ class Post extends React.Component {
     super(props);
     this.state = {
       commentsVisible: false,
-      masterCommentList: []
     }
     this.handleUpVote = this.handleUpVote.bind(this);
     this.handleDownVote = this.handleDownVote.bind(this);
     this.handleToggleComments = this.handleToggleComments.bind(this);
+    this.handleAddingNewComment = this.handleAddingNewComment.bind(this);
   }
 
   handleUpVote() {
@@ -29,14 +29,22 @@ class Post extends React.Component {
     })
   }
 
+  handleAddingNewComment(newComment) {
+    let newCommentList = this.state.masterCommentList.slice();
+    newComment.push(newComment);
+    this.setState({
+      masterCommentList: newCommentList
+    })
+  }
+
   render () {
-    const {name, title, description, time, votes, id, index} = this.props;
+    const {name, title, description, time, votes, id, index, comments} = this.props;
     let currentView = null;
 
     if (this.state.commentsVisible) {
       currentView = <div>
                       <Button size="mini" onClick={this.handleToggleComments}>Hide Comments</Button>
-                      <CommentList />
+                      <CommentList onNewCommentCreation={this.handleAddingNewComment} comments={comments}/>
                     </div>
     } else {
       currentView = <Button size="mini" onClick={this.handleToggleComments}>Show Comments</Button>
